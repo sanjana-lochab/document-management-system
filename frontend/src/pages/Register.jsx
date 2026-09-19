@@ -1,7 +1,8 @@
 import { useState } from "react";
 import API_URL from "../services/api";
 
-function Login() {
+function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -12,12 +13,13 @@ function Login() {
     setMessage("");
 
     try {
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          name,
           email,
           password,
         }),
@@ -26,11 +28,11 @@ function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message || "Login failed");
+        setMessage(data.message || "Registration failed");
         return;
       }
 
-      setMessage("Login successful!");
+      setMessage("Registration successful!");
       console.log(data);
     } catch (error) {
       setMessage("Unable to connect to the server");
@@ -41,10 +43,25 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
         <h1 className="text-3xl font-bold text-center mb-6">
-          Login
+          Create Account
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block mb-1 font-medium">
+              Name
+            </label>
+
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
           <div>
             <label className="block mb-1 font-medium">
               Email
@@ -69,7 +86,7 @@ function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="Create a password"
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -79,7 +96,7 @@ function Login() {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
           >
-            Login
+            Register
           </button>
         </form>
 
@@ -93,4 +110,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
