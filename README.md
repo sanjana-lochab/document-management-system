@@ -131,6 +131,20 @@ Maximum file size: **10 MB**
 
 **Completed**
 
+## Screenshots
+
+### Login
+![Login](screenshots/login.png)
+
+### Register
+![Register](screenshots/register.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Upload Document
+![Upload Document](screenshots/upload.png)
+
 ## Team Collaboration
 
 This project was developed collaboratively using Git and GitHub, with responsibilities divided across frontend and backend development.
