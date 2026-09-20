@@ -1,3 +1,4 @@
+import UploadDocument from "./pages/uploadDocument";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Dashboard from "./pages/Dashboard";
@@ -39,6 +40,14 @@ function App() {
   element={
     <ProtectedRoute>
       <Dashboard />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/upload"
+  element={
+    <ProtectedRoute>
+      <UploadDocument />
     </ProtectedRoute>
   }
 />
