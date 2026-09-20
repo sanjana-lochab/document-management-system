@@ -117,6 +117,14 @@ function DocumentList() {
           >
             Delete
           </button>
+          <a
+  href={`http://localhost:5000${document.filePath}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="ml-2 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+>
+  View Document
+</a>
         </div>
       ))}
     </div>
