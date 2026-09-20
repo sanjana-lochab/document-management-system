@@ -8,7 +8,8 @@ const {
     uploadDocument,
     getDocuments,
     getDocumentById,
-    deleteDocument
+    deleteDocument,
+    downloadDocument
 } = require("../controllers/documentController");
 
 const router = express.Router();
@@ -25,7 +26,10 @@ router.get(
     "/",
     getDocuments
 );
-
+router.get(
+    "/:id/download",
+    downloadDocument
+);
 router.get(
     "/:id",
     getDocumentById

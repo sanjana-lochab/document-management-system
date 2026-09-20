@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API_URL from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -32,10 +34,7 @@ function Login() {
         return;
       }
 login(data.token);
-
-setMessage("Login successful!");
-
-console.log(data);
+navigate("/dashboard");
     } catch (error) {
       setMessage("Unable to connect to the server");
     }

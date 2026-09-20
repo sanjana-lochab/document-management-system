@@ -127,10 +127,34 @@ const deleteDocument = async (req, res) => {
         });
     }
 };
+const downloadDocument = async (req, res) => {
+    try {
+        const document = await Document.findOne({
+            _id: req.params.id,
+            uploadedBy: req.user.userId
+        });
 
+        if (!document) {
+            return res.status(404).json({
+                message: "Document not found"
+            });
+        }
+
+        res.download(
+            path.join(__dirname, "..", document.filePath),
+            document.originalName
+        );
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to download document",
+            error: error.message
+        });
+    }
+};
 module.exports = {
     uploadDocument,
     getDocuments,
     getDocumentById,
-    deleteDocument
+    deleteDocument,
+    downloadDocument
 };

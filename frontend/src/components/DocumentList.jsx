@@ -35,7 +35,39 @@ function DocumentList() {
   useEffect(() => {
     fetchDocuments();
   }, [token]);
+  const handleDownload = async (id, originalName) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/documents/${id}/download`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
+    if (!response.ok) {
+      setMessage("Failed to download document");
+      return;
+    }
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = originalName;
+
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    setMessage("Unable to download document");
+  }
+};
   const handleDelete = async (id) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this document?"
@@ -125,6 +157,12 @@ function DocumentList() {
 >
   View Document
 </a>
+<button
+  onClick={() => handleDownload(document._id, document.originalName)}
+  className="ml-2 mt-3 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+>
+  Download
+</button>
         </div>
       ))}
     </div>
