@@ -43,12 +43,12 @@ function Dashboard() {
 >
   Upload Document
 </button>
-    <button
+    {/* <button
       onClick={() => navigate("/upload")}
       className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
     >
       Upload Document
-    </button>
+    </button> */}
   </div>
 
   <DocumentList />
